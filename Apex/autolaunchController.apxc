@@ -1,0 +1,9 @@
+public with sharing class autolaunchController {
+    @AuraEnabled
+    public static void saveLocation(String recordId,Decimal latitude,Decimal longitude){  
+          Account accToUpdate = [SELECT Id,Current_Location__Latitude__s,Current_Location__Longitude__s FROM Account WHERE Id = :recordId];
+          accToUpdate.Current_Location__Latitude__s = latitude; 
+          accToUpdate.Current_Location__Longitude__s = longitude;
+          update accToUpdate;
+    }
+}
